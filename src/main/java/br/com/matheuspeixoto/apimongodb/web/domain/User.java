@@ -1,4 +1,4 @@
-package br.com.matheuspeixoto.apimongodb.domain;
+package br.com.matheuspeixoto.apimongodb.web.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
-package br.com.matheuspeixoto.apimongodb.web.service;
+package br.com.matheuspeixoto.apimongodb.service;
 
-import br.com.matheuspeixoto.apimongodb.domain.User;
+import br.com.matheuspeixoto.apimongodb.web.domain.User;
 import br.com.matheuspeixoto.apimongodb.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
