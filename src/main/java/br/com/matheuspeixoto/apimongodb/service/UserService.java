@@ -1,6 +1,6 @@
 package br.com.matheuspeixoto.apimongodb.service;
 
-import br.com.matheuspeixoto.apimongodb.dto.UserDTO;
+import br.com.matheuspeixoto.apimongodb.dto.UserDto;
 import br.com.matheuspeixoto.apimongodb.repository.UserRepository;
 import br.com.matheuspeixoto.apimongodb.service.exception.ObjectNotFoundException;
 import br.com.matheuspeixoto.apimongodb.web.domain.User;
@@ -44,7 +44,7 @@ public class UserService {
         newUser.setEmail(user.getEmail());
     }
 
-    public User fromDTO(UserDTO userDTO) {
+    public User fromDTO(UserDto userDTO) {
         return User.builder()
                 .id(userDTO.getId())
                 .name(userDTO.getName())

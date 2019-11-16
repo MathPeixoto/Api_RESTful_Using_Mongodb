@@ -7,17 +7,17 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 
 @Data
-public class UserDTO implements Serializable {
+public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id;
     private String name;
     private String email;
 
-    public UserDTO() {
+    public UserDto() {
     }
 
-    public UserDTO(User user) {
+    public UserDto(User user) {
         id = user.getId();
         name = user.getName();
         email = user.getEmail();

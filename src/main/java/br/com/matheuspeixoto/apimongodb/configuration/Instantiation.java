@@ -1,5 +1,6 @@
 package br.com.matheuspeixoto.apimongodb.configuration;
 
+import br.com.matheuspeixoto.apimongodb.dto.AuthorDto;
 import br.com.matheuspeixoto.apimongodb.repository.PostRepository;
 import br.com.matheuspeixoto.apimongodb.repository.UserRepository;
 import br.com.matheuspeixoto.apimongodb.web.domain.Post;
@@ -39,15 +40,14 @@ public class Instantiation implements CommandLineRunner {
                 .date(simpleDateFormat.parse("21/03/2018"))
                 .title("On a trip")
                 .body("I'm going to travel to Sao Paulo. Regards")
-                .author(maria)
+                .author(new AuthorDto(maria))
                 .build();
-
         Post postTwo = Post.builder()
                 .id(null)
                 .date(simpleDateFormat.parse("23/03/2018"))
                 .title("Good Morning")
                 .body("I woke up happy today!")
-                .author(maria)
+                .author(new AuthorDto(maria))
                 .build();
         postRepository.saveAll(Arrays.asList(postOne, postTwo));
     }

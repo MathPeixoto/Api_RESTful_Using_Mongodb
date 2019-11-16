@@ -1,5 +1,6 @@
 package br.com.matheuspeixoto.apimongodb.web.domain;
 
+import br.com.matheuspeixoto.apimongodb.dto.AuthorDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class Post implements Serializable {
     private Date date;
     private String title;
     private String body;
-    private User author;
+    private AuthorDto author;
 
     @Override
     public boolean equals(Object o) {
