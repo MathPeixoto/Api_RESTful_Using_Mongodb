@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath />
+        <!-- lookup parent from repository -->
     </parent>
 
     <groupId>br.com.matheuspeixoto</groupId>
@@ -20,6 +20,31 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.testSource>11</maven.compiler.testSource>
+        <maven.compiler.testTarget>11</maven.compiler.testTarget>
+        <project.maven.version>3.6.0</project.maven.version>
+
+        <!--Maven Plugins-->
+        <plugin.clean.version>3.1.0</plugin.clean.version>
+        <plugin.enforcer.version>3.0.0-M1</plugin.enforcer.version>
+        <plugin.resources.version>3.1.0</plugin.resources.version>
+        <plugin.compiler.version>3.8.1</plugin.compiler.version>
+        <plugin.checkstyle.version>3.1.0</plugin.checkstyle.version>
+        <plugin.surefire.version>3.0.0-M1</plugin.surefire.version>
+        <plugin.jar.version>3.1.2</plugin.jar.version>
+        <plugin.javadoc.version>3.1.0</plugin.javadoc.version>
+        <plugin.verifier.version>1.1</plugin.verifier.version>
+        <plugin.install.version>3.0.0-M1</plugin.install.version>
+        <plugin.site.version>3.7.1</plugin.site.version>
+        <plugin.deploy.version>3.0.0-M1</plugin.deploy.version>
+        <!--Custom plugins-->
+        <plugin.jacoco.version>0.8.4</plugin.jacoco.version>
+        <plugin.spotbugs.version>3.1.11</plugin.spotbugs.version>
+        <plugin.fmt.version>2.9</plugin.fmt.version>
+        <plugin.sortpom.version>2.10.0</plugin.sortpom.version>
+
     </properties>
 
     <dependencies>
@@ -49,10 +74,285 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${plugin.clean.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${plugin.enforcer.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>${project.maven.version}</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${plugin.resources.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${plugin.compiler.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${plugin.surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${plugin.jar.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${plugin.javadoc.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-verifier-plugin</artifactId>
+                    <version>${plugin.verifier.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${plugin.checkstyle.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                                <checkstyleRules>
+                                    <module name="Checker">
+                                        <property name="severity" value="error" />
+                                        <module name="NewlineAtEndOfFile" />
+                                        <module name="FileTabCharacter" />
+                                        <module name="TreeWalker">
+                                            <module name="JavadocType" />
+                                            <module name="JavadocMethod">
+                                                <property name="scope" value="protected" />
+                                            </module>
+                                            <module name="JavadocVariable">
+                                                <property name="scope" value="protected" />
+                                            </module>
+                                            <module name="JavadocStyle" />
+                                            <module name="MagicNumber" />
+                                            <module name="MissingSwitchDefault" />
+                                            <module name="SimplifyBooleanExpression" />
+                                            <module name="SimplifyBooleanReturn" />
+                                            <module name="StringLiteralEquality" />
+                                            <module name="NestedForDepth">
+                                                <property name="max" value="3" />
+                                            </module>
+                                            <module name="NestedIfDepth">
+                                                <property name="max" value="3" />
+                                            </module>
+                                            <module name="PackageDeclaration" />
+                                            <module name="ReturnCount">
+                                                <property name="max" value="3" />
+                                            </module>
+                                            <module name="ParameterAssignment" />
+                                            <module name="MultipleVariableDeclarations" />
+                                            <module name="OneStatementPerLine" />
+                                            <module name="AvoidStarImport" />
+                                            <module name="IllegalImport" />
+                                            <module name="BooleanExpressionComplexity" />
+                                            <module name="TodoComment" />
+                                            <module name="UpperEll" />
+                                            <module name="LocalVariableName" />
+                                            <module name="TypeName" />
+                                            <module name="MethodName" />
+                                            <module name="PackageName" />
+                                            <module name="ConstantName" />
+                                            <module name="LineLength">
+                                                <property name="max" value="120" />
+                                            </module>
+                                            <module name="ParameterNumber" />
+                                            <module name="GenericWhitespace" />
+                                        </module>
+                                    </module>
+                                </checkstyleRules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${plugin.install.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${plugin.site.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${plugin.deploy.version}</version>
+                </plugin>
+                <!--COVERAGE-->
+                <!--Jacoco-->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${plugin.jacoco.version}</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>check</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <rule>
+                                        <limits>
+                                            <limit>
+                                                <minimum>0.80</minimum>
+                                            </limit>
+                                        </limits>
+                                    </rule>
+                                </rules>
+                                <excludes>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\web\domain\*</exclude>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\dto\*</exclude>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\configuration\Instantiation.java</exclude>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\web\resources\exception\StandardError.java</exclude>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\service\exception\ObjectNotFoundException.java</exclude>
+                                    <exclude>**\br\com\matheuspeixoto\apimongodb\ApiMongoApplication.java</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--CODE QUALITY-->
+                <!--SpotBugs-->
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${plugin.spotbugs.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <effort>Max</effort>
+                                <threshold>Low</threshold>
+                                <includeTests>true</includeTests>
+                                <classFilesDirectory>${project.build.outputDirectory}</classFilesDirectory>
+                                <failOnError>true</failOnError>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--Format-->
+                <plugin>
+                    <groupId>com.coveo</groupId>
+                    <artifactId>fmt-maven-plugin</artifactId>
+                    <version>${plugin.fmt.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${plugin.sortpom.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>sort</goal>
+                            </goals>
+                            <configuration>
+                                <expandEmptyElements>false</expandEmptyElements>
+                                <keepBlankLines>true</keepBlankLines>
+                                <nrOfIndentSpace>4</nrOfIndentSpace>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.coveo</groupId>
+                <artifactId>fmt-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.ekryd.sortpom</groupId>
+                <artifactId>sortpom-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
