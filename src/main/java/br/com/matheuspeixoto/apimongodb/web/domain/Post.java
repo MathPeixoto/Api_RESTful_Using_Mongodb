@@ -1,6 +1,7 @@
 package br.com.matheuspeixoto.apimongodb.web.domain;
 
 import br.com.matheuspeixoto.apimongodb.dto.AuthorDto;
+import br.com.matheuspeixoto.apimongodb.dto.CommentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -25,6 +28,7 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDto author;
+    private List<CommentDto> comments;
 
     @Override
     public boolean equals(Object o) {

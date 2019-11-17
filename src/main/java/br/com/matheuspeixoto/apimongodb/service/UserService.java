@@ -3,6 +3,7 @@ package br.com.matheuspeixoto.apimongodb.service;
 import br.com.matheuspeixoto.apimongodb.dto.UserDto;
 import br.com.matheuspeixoto.apimongodb.repository.UserRepository;
 import br.com.matheuspeixoto.apimongodb.service.exception.ObjectNotFoundException;
+import br.com.matheuspeixoto.apimongodb.web.domain.Post;
 import br.com.matheuspeixoto.apimongodb.web.domain.User;
 import org.springframework.stereotype.Service;
 

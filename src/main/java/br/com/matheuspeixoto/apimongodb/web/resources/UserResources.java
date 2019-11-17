@@ -1,6 +1,7 @@
 package br.com.matheuspeixoto.apimongodb.web.resources;
 
 import br.com.matheuspeixoto.apimongodb.dto.UserDto;
+import br.com.matheuspeixoto.apimongodb.web.domain.Post;
 import br.com.matheuspeixoto.apimongodb.web.domain.User;
 import br.com.matheuspeixoto.apimongodb.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -54,5 +55,11 @@ public class UserResources {
         user.setId(id);
         userService.update(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return new ResponseEntity<>(user.getPosts(), HttpStatus.OK);
     }
 }

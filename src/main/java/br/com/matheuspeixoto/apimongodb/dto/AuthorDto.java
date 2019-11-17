@@ -13,6 +13,9 @@ public class AuthorDto implements Serializable {
     @Getter @Setter
     private String name;
 
+    public AuthorDto() {
+    }
+
     public AuthorDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
